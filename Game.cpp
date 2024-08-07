@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
+#include "BallObject.h"
+
 
 
 // Game-related State data
@@ -10,6 +12,12 @@ const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
 // Initial velocity of the player paddle
 const float PLAYER_VELOCITY(500.0f);
 
+// Initial velocity of the Ball
+const glm::vec2 INITIAL_BALL_VELOCITY(100.0f, -350.0f);
+// Radius of the ball object
+const float BALL_RADIUS = 12.5f;
+
+BallObject* Ball;
 GameObject* Player;
 
 Game::Game(unsigned int width, unsigned int height)
@@ -57,12 +65,19 @@ void Game::Init()
         this->Height - PLAYER_SIZE.y
     );
     Player = new GameObject(playerPos, PLAYER_SIZE, ResourceManager::GetTexture("paddle"));
+    glm::vec2 ballPos = playerPos + glm::vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS,
+        -BALL_RADIUS * 2.0f);
+    Ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY,
+        ResourceManager::GetTexture("face"));
  
 }
 
 void Game::Update(float dt)
 {
-
+    // update objects
+    Ball->Move(dt, this->Width);
+    // check for collisions
+    this->DoCollisions();
 }
 
 void Game::ProcessInput(float dt)
@@ -75,13 +90,19 @@ void Game::ProcessInput(float dt)
         {
             if (Player->Position.x >= 0.0f)
                 Player->Position.x -= velocity;
+            if (Ball->Stuck)
+                Ball->Position.x -= velocity;
         }
         if (this->Keys[GLFW_KEY_D])
         {
             if (Player->Position.x <= this->Width - Player->Size.x)
                 Player->Position.x += velocity;
+            if (Ball->Stuck)
+                Ball->Position.x += velocity;
         }
     }
+    if (this->Keys[GLFW_KEY_SPACE])
+        Ball->Stuck = false;
 
 }
 
@@ -92,8 +113,37 @@ void Game::Render()
         //draw background
         Texture2D background = ResourceManager::GetTexture("background");
         Renderer->DrawSprite(background, glm::vec2(0.0f, 0.0f), glm::vec2(this->Width, this->Height), 0.0f);
+        Ball->Draw(*Renderer);
     }
     // draw level
     this->Levels[this->Level].Draw(*Renderer);
     Player->Draw(*Renderer);
+}
+
+bool Game::CheckCollision(GameObject& one, GameObject& two) // AABB - AABB collision
+{
+    // collision x-axis?
+    bool collisionX = one.Position.x + one.Size.x >= two.Position.x &&
+        two.Position.x + two.Size.x >= one.Position.x;
+    // collision y-axis?
+    bool collisionY = one.Position.y + one.Size.y >= two.Position.y &&
+        two.Position.y + two.Size.y >= one.Position.y;
+    // collision only if on both axes
+    return collisionX && collisionY;
+}
+
+void Game::DoCollisions()
+{
+    for (GameObject& box : this->Levels[this->Level].Bricks)
+    {
+        if (!box.Destroyed)
+        {
+            if (CheckCollision(*Ball, box))
+            {
+                if (!box.IsSolid)
+                    box.Destroyed = true;
+            }
+                
+        }
+    }
 }

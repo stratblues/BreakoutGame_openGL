@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW\glfw3.h>
 #include "GameLevel.h"
+
 //current state
 enum GameState {
 	GAME_ACTIVE,
@@ -28,6 +29,8 @@ public:
 	void ProcessInput(float dt);
 	void Update(float dt);
 	void Render();
+	bool CheckCollision(GameObject& one, GameObject& two);
+	void DoCollisions();
 };
 
 #endif

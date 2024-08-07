@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Game">
+    <Position X="0.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAABAAAAAAACAAAAEAAAgigAACBABACBAAAAAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BallObject">
+    <Position X="5.25" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAIAABAAAAAAAACAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BallObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLevel">
+    <Position X="3" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAgAAAAABAAAAAAAAQBIAAAAAAAAAAAA=</HashCode>
+      <FileName>GameLevel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject">
+    <Position X="5.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgoAgAAAAAAAAAAAAAgAQAAAAgAIEAIA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResourceManager">
+    <Position X="8.25" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAEBAACAAAAAABAAACAEAAAAAAAAAAAAABAAAhAAAA=</HashCode>
+      <FileName>ResourceManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shader">
+    <Position X="11.25" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAYBAAAAAAghAAAAAAAAAAAAAEAAAAIAAAAAAIAEA=</HashCode>
+      <FileName>Shader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteRenderer">
+    <Position X="11" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAEAAAAAAAAAAAAABAAAIAAAAAAAAAEAAIAA=</HashCode>
+      <FileName>SpriteRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Texture2D">
+    <Position X="9.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAERBBAgAAAAAAAAEAAAAAAAAAAAIAAAEAAACA=</HashCode>
+      <FileName>Texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="GameState">
+    <Position X="0.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
-    glfwWindowHint(GLFW_RESIZABLE, false);
+    glfwWindowHint(GLFW_RESIZABLE, true);
 
     GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Breakout", nullptr, nullptr);
     glfwMakeContextCurrent(window);
@@ -56,6 +56,14 @@ int main(int argc, char* argv[])
     // -------------------
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
+
+    // Callback function to handle window resize
+    glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height) {
+        std::cout << "Window resized to " << width << " x " << height << std::endl;
+
+        // Adjust the viewport to the new window dimensions
+        glViewport(0, 0, width, height);
+        });
 
     while (!glfwWindowShouldClose(window))
     {
